@@ -1,0 +1,23 @@
+.search-form {
+    margin: 20px auto;
+    width: 90%;
+    max-width: 1000px;
+}
+
+.search-page {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.search-results-list {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto 30px;
+    padding: 0;
+}
+
+/*@media (min-width: 768px) {
+    .search-form {
+        width: 90%;
+        max-width: 1000px;
+    }
+}*/

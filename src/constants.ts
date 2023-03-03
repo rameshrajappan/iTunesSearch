@@ -1,0 +1,6 @@
+export const BATCH_SIZE = 10;
+export const GET_MEDIAS = 'GET_MEDIAS';
+export const GET_MEDIAS_SUCCESS = 'GET_MEDIAS_SUCCESS';
+export const GET_MEDIAS_FAILURE = 'GET_MEDIAS_FAILURE';
+export const GET_NEXT_BATCH = 'GET_NEXT_BATCH';
+export const ADD_NEXT_BATCH = 'ADD_NEXT_BATCH';
