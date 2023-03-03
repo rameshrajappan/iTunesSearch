@@ -1,2 +1,2 @@
 # iTunesSearchDemo
-A demo react application using iTunes Search API
+React demo application using iTunes Search API
