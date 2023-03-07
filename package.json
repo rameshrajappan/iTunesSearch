@@ -50,6 +50,11 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ]
+  },
   "devDependencies": {
     "eslint-config-react-app": "^7.0.1",
     "jest-editor-support": "^31.0.1"
