@@ -5,7 +5,7 @@ import {
     Route,
 } from 'react-router-dom';
 import './App.css';
-import Search from './pages/Search';
+import Search from './features/medias/Search';
 
 export default function App() {
     return (

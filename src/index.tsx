@@ -1,15 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { createStore, applyMiddleware } from 'redux';
+import store from './store';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import rootReducer from './reducers';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 const root = createRoot(
     document.getElementById('root') as HTMLElement
 );
