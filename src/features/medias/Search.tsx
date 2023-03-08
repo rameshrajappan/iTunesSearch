@@ -3,18 +3,19 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import { useSelector, useDispatch } from 'react-redux';
+import { useAppDispatch, useAppSelector } from '../../app/hook';
 import { fetchMedias, selectAllMedias, selectActivePageMedias, hasMoreMediasToRender, moveNext } from './mediasSlice'
 import SearchRow from "./SearchRow";
 import CircularProgress from '@mui/material/CircularProgress';
+import { RootState } from '../../app/store';
 
 function Search() {
-    const dispatch:any = useDispatch()
-    const medias = useSelector(selectActivePageMedias);
-    const allMedias = useSelector(selectAllMedias);
-    const mediasStatus = useSelector((state: any) => state.medias.status);
-    const error = useSelector((state: any) => state.medias.error);
-    const hasMoreMedias = useSelector(hasMoreMediasToRender);
+    const dispatch: any = useAppDispatch()
+    const medias = useAppSelector(selectActivePageMedias);
+    const allMedias = useAppSelector(selectAllMedias);
+    const mediasStatus = useAppSelector((state: RootState) => state.medias.status);
+    const error = useAppSelector((state: RootState) => state.medias.error);
+    const hasMoreMedias = useAppSelector(hasMoreMediasToRender);
     const [searchTerm, setSearchTerm] = useState("");
     const [isBottom, setIsBottom] = useState(false);
     const handleUserScroll = () => {
@@ -54,10 +55,10 @@ function Search() {
         setSearchTerm(e.target.value);
     };
     const renderMedias = () => {
-        if (mediasStatus==='loading') return <React.Fragment><CircularProgress /><p>Loading medias...</p></React.Fragment>;
-        if (mediasStatus==='succeeded' && allMedias?.length === 0) return <p>No Results.</p>;
+        if (mediasStatus === 'loading') return <React.Fragment><CircularProgress /><p>Loading medias...</p></React.Fragment>;
+        if (mediasStatus === 'succeeded' && allMedias?.length === 0) return <p>No Results.</p>;
         if (error) return <p>Unable to display medias.</p>;
-        const infiniteScrollLoader = mediasStatus==='succeeded' && allMedias.length > medias.length ? <CircularProgress color="secondary" /> : "";
+        const infiniteScrollLoader = mediasStatus === 'succeeded' && allMedias.length > medias.length ? <CircularProgress color="secondary" /> : "";
         return (
             <ul className="search-results-list">
                 {medias?.map((track: any, index: number) => (
@@ -79,8 +80,9 @@ function Search() {
                     onChange={handleTextFieldChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search iTunes"
-                    inputProps={{ 'aria-label': 'search iTunes' }} />
-                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search">
+                    inputProps={{ 'aria-label': 'search iTunes' }}
+                    data-testid="searchTerm" />
+                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" data-testid="searchButton">
                     <SearchIcon />
                 </IconButton>
             </Paper>

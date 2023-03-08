@@ -1,7 +1,15 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { BATCH_SIZE } from "../../constants";
-export const initialState = {
+import { RootState } from '../../app/store';
+// Define a type for the slice state
+export interface MediaState {
+    medias: any,
+    status: string,
+    currentPage: number,
+    error: string
+}
+export const initialState: MediaState = {
     medias: [],
     status: 'idle',
     currentPage: 1,
@@ -45,9 +53,9 @@ const mediasSlice = createSlice({
 export const { moveNext } = mediasSlice.actions;
 export default mediasSlice.reducer;
 
-export const selectAllMedias = (state: any) => state.medias?.medias?.results;
+export const selectAllMedias = (state: RootState) => state.medias?.medias?.results;
 
-export const selectActivePageMedias = (state: any) => state.medias?.medias?.results?.slice(0, state.medias.currentPage * BATCH_SIZE);
+export const selectActivePageMedias = (state: RootState) => state.medias?.medias?.results?.slice(0, state.medias.currentPage * BATCH_SIZE);
 
-export const hasMoreMediasToRender = (state: any) => (state.medias.currentPage * BATCH_SIZE) < state.medias?.medias?.resultCount;
+export const hasMoreMediasToRender = (state: RootState) => (state.medias.currentPage * BATCH_SIZE) < state.medias?.medias?.resultCount;
 
