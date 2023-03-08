@@ -3,13 +3,18 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import { connect } from 'react-redux';
-import './Search.css';
-import { fetchMedias, addNextBatch, getNextBatch } from "../actions/mediasActions";
-import SearchRow from "../components/SearchRow";
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchMedias, selectAllMedias, selectActivePageMedias, hasMoreMediasToRender, moveNext } from './mediasSlice'
+import SearchRow from "./SearchRow";
 import CircularProgress from '@mui/material/CircularProgress';
 
-function Search({ dispatch, loading, loaded, medias, nextBatch, hasErrors, allMedias }: any) {
+function Search() {
+    const dispatch:any = useDispatch()
+    const medias = useSelector(selectActivePageMedias);
+    const allMedias = useSelector(selectAllMedias);
+    const mediasStatus = useSelector((state: any) => state.medias.status);
+    const error = useSelector((state: any) => state.medias.error);
+    const hasMoreMedias = useSelector(hasMoreMediasToRender);
     const [searchTerm, setSearchTerm] = useState("");
     const [isBottom, setIsBottom] = useState(false);
     const handleUserScroll = () => {
@@ -23,8 +28,6 @@ function Search({ dispatch, loading, loaded, medias, nextBatch, hasErrors, allMe
         // check if user is near to the bottom of the body
         if (scrollTop + windowHeight + 50 >= scrollHeight) {
             setIsBottom(true);
-            //console.log(`scrollTop: ${scrollTop} , scrollHeight: ${scrollHeight} , windowHeight: ${windowHeight} `);
-            //console.log("setting botton to true");
         }
     };
     // on mount
@@ -36,15 +39,13 @@ function Search({ dispatch, loading, loaded, medias, nextBatch, hasErrors, allMe
     useEffect(() => {
         if (isBottom) {
 
-            if (!nextBatch.length) {
+            if (hasMoreMedias) {
                 // fetch another batch
-                dispatch(getNextBatch());
+                dispatch(moveNext());
             }
-            // render the next batch of pre-fetched data
-            dispatch(addNextBatch());
             setIsBottom(false);
         }
-    }, [isBottom, dispatch, setIsBottom, nextBatch.length]);
+    }, [isBottom, dispatch, hasMoreMedias]);
     const handleSubmit = (e: any) => {
         e.preventDefault();
         dispatch(fetchMedias(searchTerm));
@@ -53,10 +54,10 @@ function Search({ dispatch, loading, loaded, medias, nextBatch, hasErrors, allMe
         setSearchTerm(e.target.value);
     };
     const renderMedias = () => {
-        if (loading) return <React.Fragment><CircularProgress /><p>Loading medias...</p></React.Fragment>;
-        if (loaded && medias?.length === 0) return <p>No Results.</p>;
-        if (hasErrors) return <p>Unable to display medias.</p>;
-        const infiniteScrollLoader = loaded && allMedias.length > medias.length ? <CircularProgress color="secondary" /> : "";
+        if (mediasStatus==='loading') return <React.Fragment><CircularProgress /><p>Loading medias...</p></React.Fragment>;
+        if (mediasStatus==='succeeded' && allMedias?.length === 0) return <p>No Results.</p>;
+        if (error) return <p>Unable to display medias.</p>;
+        const infiniteScrollLoader = mediasStatus==='succeeded' && allMedias.length > medias.length ? <CircularProgress color="secondary" /> : "";
         return (
             <ul className="search-results-list">
                 {medias?.map((track: any, index: number) => (
@@ -88,16 +89,6 @@ function Search({ dispatch, loading, loaded, medias, nextBatch, hasErrors, allMe
     );
 }
 
-const mapStateToProps = (state: any) => ({
-    loading: state.medias.loading,
-    loaded: state.medias.loaded,
-    medias: state.medias.medias,
-    hasErrors: state.medias.hasErrors,
-    allMedias: state.medias.allMedias,
-    nextBatch: state.medias.nextBatch,
-    currentPage: state.medias.currentPage,
-    isEndOfCatalogue: state.medias.isEndOfCatalogue,
-    totalResultCount: state.medias.totalResultCount,
-});
 
-export default connect(mapStateToProps)(Search);
+
+export default Search;

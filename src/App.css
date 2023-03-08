@@ -44,3 +44,44 @@
     transform: rotate(360deg);
   }
 }
+.search-form {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 1000px;
+}
+
+.search-page {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.search-results-list {
+  width: 90%;
+  max-width: 1000px;
+  margin: 0 auto 30px;
+  padding: 0;
+}
+
+/*@media (min-width: 768px) {
+  .search-form {
+      width: 90%;
+      max-width: 1000px;
+  }
+}*/
+.search-item {
+  list-style: none;
+  margin-top: 10px;
+}
+.search-item img {
+  margin-left: auto;
+}
+
+.track-details {
+  max-width: calc(100% - 160px);
+}
+.collection-name, .artist-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  white-space: nowrap;
+}
