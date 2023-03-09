@@ -1,7 +1,11 @@
-import { cleanup, screen, fireEvent, within ,waitFor, getByRole} from '@testing-library/react';
-import { renderSearch } from '../utils/test-utils';
+import { cleanup, screen, fireEvent, within } from '@testing-library/react';
+import { renderSearch, getMockSearchData } from '../utils/test-utils';
+import axios from 'axios';
 afterEach(cleanup);
+jest.mock('axios');
 test('renders search page', async () => {
+    const resp = { data: getMockSearchData() };
+    axios.get.mockResolvedValue(resp);
     const { asFragment } = renderSearch();
     expect(asFragment).toMatchSnapshot();
     const searchButton = screen.getByTestId("searchButton");
@@ -13,5 +17,5 @@ test('renders search page', async () => {
     const searchItems = within(searchResults).getAllByRole("listitem");
     expect(searchItems.length).toBeGreaterThan(0);
     expect(searchItems[0]).toHaveClass("search-item");
-    // screen.debug();
+    //screen.debug();
 });
