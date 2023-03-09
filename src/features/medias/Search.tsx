@@ -60,7 +60,7 @@ function Search() {
         if (error) return <p>Unable to display medias.</p>;
         const infiniteScrollLoader = mediasStatus === 'succeeded' && allMedias.length > medias.length ? <CircularProgress color="secondary" /> : "";
         return (
-            <ul className="search-results-list">
+            <ul className="search-results-list" data-testid="searchResults">
                 {medias?.map((track: any, index: number) => (
                     <SearchRow track={track} key={index} />
                 ))}
