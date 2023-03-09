@@ -37,7 +37,7 @@ Testing is essential though, we would like to see, at least, unit testing approa
 - MaterialU
 
 # Details of Solution
-Used React, Redux Toolkit, React Infinite Scroll to create a list page with inifinite scrolling. 
-For UI used MaterialUI. 
-Used funcitonal programming with hooks. 
+Used React, Redux Toolkit, React Infinite Scroll to create a list page with inifinite scrolling.\ 
+For UI used MaterialUI.\ 
+Used funcitonal programming with hooks.\ 
 For testing used react testing library , mainly added a test for search page where we tested if the mock data is loaded properly.
