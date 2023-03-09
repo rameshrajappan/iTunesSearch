@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
@@ -8,6 +8,7 @@ import { fetchMedias, selectAllMedias, selectActivePageMedias, hasMoreMediasToRe
 import SearchRow from "./SearchRow";
 import CircularProgress from '@mui/material/CircularProgress';
 import { RootState } from '../../app/store';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 function Search() {
     const dispatch: any = useAppDispatch()
@@ -17,56 +18,54 @@ function Search() {
     const error = useAppSelector((state: RootState) => state.medias.error);
     const hasMoreMedias = useAppSelector(hasMoreMediasToRender);
     const [searchTerm, setSearchTerm] = useState("");
-    const [isBottom, setIsBottom] = useState(false);
-    const handleUserScroll = () => {
-        // get scroll top value
-        const scrollTop = document.documentElement.scrollTop;
+    //To display submitted search term
+    const [submittedTerm, setSubmittedTerm] = useState("");
 
-        // get the entire height, including padding
-        const scrollHeight = document.documentElement.scrollHeight;
-        const windowHeight = window.innerHeight;
-
-        // check if user is near to the bottom of the body
-        if (scrollTop + windowHeight + 50 >= scrollHeight) {
-            setIsBottom(true);
-        }
+    const fetchNextPage = () => {
+        dispatch(moveNext());
     };
-    // on mount
-    useEffect(() => {
-        window.addEventListener("scroll", handleUserScroll);
-        return () => window.removeEventListener("scroll", handleUserScroll);
-    }, []);
-    // handle re-rendering when users get to the bottom of the page
-    useEffect(() => {
-        if (isBottom) {
-
-            if (hasMoreMedias) {
-                // fetch another batch
-                dispatch(moveNext());
-            }
-            setIsBottom(false);
-        }
-    }, [isBottom, dispatch, hasMoreMedias]);
     const handleSubmit = (e: any) => {
         e.preventDefault();
+        setSubmittedTerm(searchTerm);
         dispatch(fetchMedias(searchTerm));
     };
     const handleTextFieldChange = (e: any) => {
         setSearchTerm(e.target.value);
     };
     const renderMedias = () => {
-        if (mediasStatus === 'loading') return <React.Fragment><CircularProgress /><p>Loading medias...</p></React.Fragment>;
-        if (mediasStatus === 'succeeded' && allMedias?.length === 0) return <p>No Results.</p>;
-        if (error) return <p>Unable to display medias.</p>;
-        const infiniteScrollLoader = mediasStatus === 'succeeded' && allMedias.length > medias.length ? <CircularProgress color="secondary" /> : "";
-        return (
-            <ul className="search-results-list" data-testid="searchResults">
-                {medias?.map((track: any, index: number) => (
-                    <SearchRow track={track} key={index} />
-                ))}
-                {infiniteScrollLoader}
-            </ul>
-        );
+        if (mediasStatus === 'loading') {
+            return <React.Fragment><CircularProgress /><p>Loading medias...</p></React.Fragment>;
+        }
+        if (mediasStatus === 'succeeded') {
+            if (allMedias?.length === 0) {
+                return <p>No Results.</p>;
+            } else {
+                return (
+                    <ul className="search-results-list" data-testid="searchResults">
+
+                        <InfiniteScroll
+                            dataLength={medias?.length || 0}
+                            next={fetchNextPage}
+                            hasMore={hasMoreMedias}
+                            loader={<div><CircularProgress color="secondary" /><h4>Loading...</h4></div>}
+                            endMessage={
+                                <p style={{ textAlign: 'center' }}>
+                                    We found <strong>{allMedias?.length}</strong> results for <strong>{submittedTerm}</strong>!
+                                </p>
+                            }
+                        >
+                            {medias?.map((track: any, index: number) => (
+                                <SearchRow track={track} key={index} />
+                            ))}
+                        </InfiniteScroll>
+                    </ul>
+                );
+            }
+        }
+        if (error) {
+            return <p>Unable to display medias.</p>;
+        }
+        return <p>Search for your favourite music</p>
     }
     return (
         <div className="search-page">
@@ -82,7 +81,7 @@ function Search() {
                     placeholder="Search iTunes"
                     inputProps={{ 'aria-label': 'search iTunes' }}
                     data-testid="searchTerm" />
-                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" data-testid="searchButton">
+                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" data-testid="searchButton" disabled={!searchTerm}>
                     <SearchIcon />
                 </IconButton>
             </Paper>
@@ -90,7 +89,4 @@ function Search() {
         </div>
     );
 }
-
-
-
 export default Search;
