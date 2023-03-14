@@ -41,3 +41,5 @@ Testing is essential though, we would like to see, at least, unit testing approa
 - For UI used MaterialUI.
 - Used funcitonal programming with hooks.
 - For testing used react testing library , mainly added a test for search page where we tested if the mock data is loaded properly.
+
+View application in [CodeSandBox](https://codesandbox.io/p/github/rameshrajappan/iTunesSearchDemo/main).
