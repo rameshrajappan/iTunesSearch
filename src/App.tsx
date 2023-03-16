@@ -1,4 +1,3 @@
-import React from 'react';
 import {
     BrowserRouter as Router,
     Routes,
@@ -6,13 +5,14 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import Search from './features/medias/Search';
+import MainLogo from './header-logo.png';
 
 export default function App() {
     return (
         <div className="App">
             <header className="App-header">
                 <div className="App-logo-container">
-                    <img src="/header-logo.png" className="App-logo" alt="logo" />
+                    <img src={MainLogo} className="App-logo" alt="logo" />
                     <div className="App-title">iTunes Search</div>
                 </div>
             </header>
