@@ -19,6 +19,7 @@ export default function App() {
             <Router>
                 <Routes>
                     <Route path="/" element={<Search />} />
+                    <Route path="/iTunesSearchDemo" element={<Search />} />
                 </Routes>
             </Router>
         </div>
