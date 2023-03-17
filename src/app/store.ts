@@ -3,7 +3,7 @@ import mediasReducer from '../features/medias/mediasSlice';
 
 const store = configureStore({
     reducer: {
-        medias: mediasReducer
+        itunes: mediasReducer
     }
 });
 

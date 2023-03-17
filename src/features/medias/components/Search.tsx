@@ -3,19 +3,20 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import { useAppDispatch, useAppSelector } from '../../app/hook';
-import { fetchMedias, selectAllMedias, selectActivePageMedias, hasMoreMediasToRender, moveNext } from './mediasSlice'
-import SearchRow from "./SearchRow";
+import { useAppDispatch, useAppSelector } from '../../../app/hook';
+import { fetchMedias, selectAllMedias, selectActivePageMedias, hasMoreMediasToRender, moveNext } from '../mediasSlice'
+import SearchRow from './SearchRow';
 import CircularProgress from '@mui/material/CircularProgress';
-import { RootState } from '../../app/store';
+import { RootState } from '../../../app/store';
 import InfiniteScroll from 'react-infinite-scroll-component';
+
 
 function Search() {
     const dispatch: any = useAppDispatch()
     const medias = useAppSelector(selectActivePageMedias);
     const allMedias = useAppSelector(selectAllMedias);
-    const mediasStatus = useAppSelector((state: RootState) => state.medias.status);
-    const error = useAppSelector((state: RootState) => state.medias.error);
+    const mediasStatus = useAppSelector((state: RootState) => state.itunes.status);
+    const error = useAppSelector((state: RootState) => state.itunes.error);
     const hasMoreMedias = useAppSelector(hasMoreMediasToRender);
     const [searchTerm, setSearchTerm] = useState("");
     //To display submitted search term

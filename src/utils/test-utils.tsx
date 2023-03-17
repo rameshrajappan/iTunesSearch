@@ -2,7 +2,7 @@ import { render, RenderResult } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import store from '../app/store';
 import App from '../App';
-import Search from '../features/medias/Search';
+import Search from '../features/medias/components/Search';
 
 export const renderApp = (): RenderResult =>
     render(

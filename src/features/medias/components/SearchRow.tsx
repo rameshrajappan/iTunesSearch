@@ -9,8 +9,9 @@ import AudioBookIcon from '@mui/icons-material/AudioFile';
 import IconButton from '@mui/material/IconButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { orange } from '@mui/material/colors';
+import MediaItemType from '../types/MediaItemType';
 
-function SearchRow({ track }: any) {
+function SearchRow({ track }: { track: MediaItemType }) {
     const { trackName, collectionName, primaryGenreName, artistName, wrapperType,
         artworkUrl100, kind, previewUrl, trackViewUrl, collectionViewUrl } = track;
     let title = trackName;

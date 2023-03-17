@@ -4,7 +4,7 @@ import {
     Route,
 } from 'react-router-dom';
 import './App.css';
-import Search from './features/medias/Search';
+import Search from './features/medias/components/Search';
 import MainLogo from './header-logo.png';
 
 export default function App() {

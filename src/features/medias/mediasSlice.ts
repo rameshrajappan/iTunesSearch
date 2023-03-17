@@ -1,27 +1,17 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
 import { BATCH_SIZE } from "../../constants";
 import { RootState } from '../../app/store';
-// Define a type for the slice state
-export interface MediaState {
-    medias: any,
-    status: string,
-    currentPage: number,
-    error: string
-}
-export const initialState: MediaState = {
-    medias: [],
+import MediasStateType from './types/MediasStateType';
+import searchItunes from './services/searchService';
+
+export const initialState: MediasStateType = {
+    medias: { results: [], resultCount: 0 },
     status: 'idle',
     currentPage: 1,
     error: ''
 };
 export const fetchMedias = createAsyncThunk('medias/fetchMedias', async (searchTerm: any) => {
-    const response: any = await axios.get(
-        `https://itunes.apple.com/search`,
-        {
-            params: { term: searchTerm, limit: 200 }
-        }
-    );
+    const response: any = await searchItunes(searchTerm, 200);
     return response.data
 });
 
@@ -53,9 +43,9 @@ const mediasSlice = createSlice({
 export const { moveNext } = mediasSlice.actions;
 export default mediasSlice.reducer;
 
-export const selectAllMedias = (state: RootState) => state.medias?.medias?.results;
+export const selectAllMedias = (state: RootState) => state.itunes?.medias?.results;
 
-export const selectActivePageMedias = (state: RootState) => state.medias?.medias?.results?.slice(0, state.medias.currentPage * BATCH_SIZE);
+export const selectActivePageMedias = (state: RootState) => state.itunes?.medias?.results?.slice(0, state.itunes.currentPage * BATCH_SIZE);
 
-export const hasMoreMediasToRender = (state: RootState) => (state.medias.currentPage * BATCH_SIZE) < state.medias?.medias?.resultCount;
+export const hasMoreMediasToRender = (state: RootState) => (state.itunes.currentPage * BATCH_SIZE) < state.itunes?.medias?.resultCount;
 
