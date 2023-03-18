@@ -17,5 +17,4 @@ test('renders search page', async () => {
     const searchResults = await screen.findByTestId("searchResults", {}, { timeout: 5000 });
     const searchItems = within(searchResults).getAllByRole("listitem");
     expect(searchItems).toHaveLength(2);
-    //screen.debug();
 });
