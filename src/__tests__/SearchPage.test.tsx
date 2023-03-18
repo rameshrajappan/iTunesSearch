@@ -1,0 +1,21 @@
+import { cleanup, screen, fireEvent, within } from '@testing-library/react';
+import { renderWithProviders, getMockSearchData } from '../utils/test-utils';
+import axios from 'axios';
+import SearchPage from '../features/medias/components/SearchPage';
+afterEach(cleanup);
+jest.mock('axios');
+test('renders search page', async () => {
+    const resp = { data: getMockSearchData() };
+    (axios.get as jest.MockedFunction<typeof axios.get>).mockResolvedValue(resp);
+    const { asFragment } = renderWithProviders(<SearchPage />);
+    expect(asFragment).toMatchSnapshot();
+    const searchButton = screen.getByTestId("searchButton");
+    const searchMaterialInput = screen.getByTestId("searchTerm");
+    const searchInput = within(searchMaterialInput).getByRole('textbox');
+    fireEvent.change(searchInput, { target: { value: 'test' } });
+    fireEvent.click(searchButton);
+    const searchResults = await screen.findByTestId("searchResults", {}, { timeout: 5000 });
+    const searchItems = within(searchResults).getAllByRole("listitem");
+    expect(searchItems).toHaveLength(2);
+    //screen.debug();
+});
