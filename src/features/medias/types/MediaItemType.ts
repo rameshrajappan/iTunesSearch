@@ -1,5 +1,5 @@
 type MediaItemType = {
-    wrapperType: 'audiobook' | 'track',
+    wrapperType: string,
     artistId: string,
     collectionId: string,
     artistName: string,
