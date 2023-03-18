@@ -16,6 +16,5 @@ test('renders search page', async () => {
     const searchResults = await screen.findByTestId("searchResults", {}, { timeout: 5000 });
     const searchItems = within(searchResults).getAllByRole("listitem");
     expect(searchItems).toHaveLength(2);
-    expect(searchItems[0]).toHaveClass("search-item");
     //screen.debug();
 });

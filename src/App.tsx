@@ -3,26 +3,63 @@ import {
     Routes,
     Route,
 } from 'react-router-dom';
-import './App.css';
-import Search from './features/medias/components/Search';
+import SearchPage from './features/medias/components/SearchPage';
+import styled, { keyframes } from 'styled-components';
 import MainLogo from './header-logo.png';
+const appLogoSpin = keyframes`
+from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+const AppWrapper = styled.div`
+    text-align: center;
+`;
 
+const AppHeader = styled.header`
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    font-size: calc(10px + 2vmin);
+    color: #ffffff;
+    background-color: rgba(22, 22, 23, .8);
+`;
+
+const AppLogoContainer = styled.div`
+    margin: auto;
+`;
+
+const AppLogoImage = styled.img`
+    height: 40px;
+    pointer-events: none;
+    @media (prefers-reduced-motion: no-preference) {
+        animation: ${appLogoSpin} infinite 20s linear;
+    }
+`;
+const AppTitle = styled.div`
+font-size: 14px;
+    margin-top: -6px;
+`;
 export default function App() {
     return (
-        <div className="App">
-            <header className="App-header">
-                <div className="App-logo-container">
-                    <img src={MainLogo} className="App-logo" alt="logo" />
-                    <div className="App-title">iTunes Search</div>
-                </div>
-            </header>
+        <AppWrapper>
+            <AppHeader>
+                <AppLogoContainer>
+                    <AppLogoImage src={MainLogo} alt="logo" />
+                    <AppTitle>iTunes Search</AppTitle>
+                </AppLogoContainer>
+            </AppHeader>
             <Router>
                 <Routes>
-                    <Route path="/" element={<Search />} />
-                    <Route path="/iTunesSearchDemo" element={<Search />} />
+                    <Route path="/" element={<SearchPage />} />
+                    <Route path="/iTunesSearchDemo" element={<SearchPage />} />
                 </Routes>
             </Router>
-        </div>
+        </AppWrapper>
     );
 }
 

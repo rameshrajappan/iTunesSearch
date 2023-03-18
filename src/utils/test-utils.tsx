@@ -2,7 +2,7 @@ import { render, RenderResult } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import store from '../app/store';
 import App from '../App';
-import Search from '../features/medias/components/Search';
+import SearchPage from '../features/medias/components/SearchPage';
 
 export const renderApp = (): RenderResult =>
     render(
@@ -14,7 +14,7 @@ export const renderApp = (): RenderResult =>
 export const renderSearch = (): RenderResult =>
     render(
         <Provider store={store}>
-            <Search />
+            <SearchPage />
         </Provider>
     );
 
