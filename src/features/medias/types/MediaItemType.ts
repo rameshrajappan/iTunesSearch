@@ -1,7 +1,7 @@
 type MediaItemType = {
-    wrapperType: 'audiobook' | 'track',
-    artistId: string,
-    collectionId: string,
+    wrapperType: string,
+    artistId: number,
+    collectionId: number,
     artistName: string,
     collectionName: string,
     collectionCensoredName: string,
@@ -18,8 +18,8 @@ type MediaItemType = {
     primaryGenreName: string,
     previewUrl: string,
     description: string,
-    trackViewUrl: string,
-    kind: string,
-    trackName: string
+    trackViewUrl?: string,
+    kind?: string,
+    trackName?: string
 };
 export default MediaItemType;
