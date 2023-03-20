@@ -37,10 +37,13 @@ Testing is essential though, we would like to see, at least, unit testing approa
 - MaterialU
 
 # Details of Solution
-- Used React, Redux Toolkit, React Infinite Scroll to create a list page with inifinite scrolling.
+- Used Typescript, React, Redux Toolkit etc.
+- Used React Infinite Scroll package for lazy loading. 
 - For UI used MaterialUI.
 - Used funcitonal programming with hooks.
-- For testing used react testing library , mainly added a test for search page where we tested if the mock data is loaded properly.
+- For testing used react testing library ,added tests for search components.
+- Used Styled components and Material sx for styling
+- Used express js to serve the buid pages.
 
 View application in [GitHub Pages](https://rameshrajappan.github.io/iTunesSearchDemo/)  
 View application in [CodeSandBox](https://codesandbox.io/p/github/rameshrajappan/iTunesSearchDemo/main).
