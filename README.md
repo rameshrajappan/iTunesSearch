@@ -47,3 +47,6 @@ Testing is essential though, we would like to see, at least, unit testing approa
 
 View application in [GitHub Pages](https://rameshrajappan.github.io/iTunesSearchDemo/)  
 View application in [CodeSandBox](https://codesandbox.io/p/github/rameshrajappan/iTunesSearchDemo/main).
+
+![image](https://user-images.githubusercontent.com/13627992/226532243-227f4005-ba0a-4d44-9e1e-37655ecc2d15.png)
+
