@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch } from '../../../app/hook';
-import { fetchMedias } from '../mediasSlice'
+import { fetchData } from '../searchSlice'
 import SearchResults from './SearchResults';
 import styled from 'styled-components';
 
@@ -21,7 +21,7 @@ export default function SearchPage() {
     const handleSubmit = (e: any) => {
         e.preventDefault();
         setSubmittedTerm(searchTerm);
-        dispatch(fetchMedias(searchTerm));
+        dispatch(fetchData(searchTerm));
     };
     const handleTextFieldChange = (e: any) => {
         setSearchTerm(e.target.value);

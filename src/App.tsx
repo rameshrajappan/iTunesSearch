@@ -3,7 +3,7 @@ import {
     Routes,
     Route,
 } from 'react-router-dom';
-import SearchPage from './features/medias/components/SearchPage';
+import SearchPage from './features/search/components/SearchPage';
 import styled, { keyframes } from 'styled-components';
 import MainLogo from './header-logo.png';
 const appLogoSpin = keyframes`

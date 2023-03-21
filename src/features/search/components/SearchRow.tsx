@@ -9,14 +9,14 @@ import AudioBookIcon from '@mui/icons-material/AudioFile';
 import IconButton from '@mui/material/IconButton';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import { orange } from '@mui/material/colors';
-import MediaItemType from '../types/MediaItemType';
+import SearchItemType from '../types/SearchItemType';
 import styled from 'styled-components';
-const MediaItem = styled.li`
+const SearchItem = styled.li`
     list-style: none;
     margin-top: 10px;
 `;
 //Material sx style
-const mediaContentStyle = {
+const itemContentStyle = {
     maxWidth: '100%',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
@@ -28,7 +28,7 @@ const iconPropsStyle = {
     width: 25,
     color: orange[500]
 };
-function SearchRow({ track }: { track: MediaItemType }) {
+function SearchRow({ track }: { track: SearchItemType }) {
     const { trackName, collectionName, primaryGenreName, artistName, wrapperType,
         artworkUrl100, kind, previewUrl, trackViewUrl, collectionViewUrl } = track;
     let title = trackName;
@@ -47,7 +47,7 @@ function SearchRow({ track }: { track: MediaItemType }) {
     }
 
     return (
-        <MediaItem>
+        <SearchItem>
             <Card sx={{ display: 'flex' }} elevation={4}>
                 <Box sx={{
                     display: 'flex',
@@ -55,13 +55,13 @@ function SearchRow({ track }: { track: MediaItemType }) {
                     maxWidth: 'calc(100% - 160px)'
                 }}>
                     <CardContent sx={{ flex: '1 0 auto', pt: 1 }}>
-                        <Typography component="div" variant="h5" sx={mediaContentStyle}>
+                        <Typography component="div" variant="h5" sx={itemContentStyle}>
                             {title}
                         </Typography>
-                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={mediaContentStyle}>
+                        <Typography variant="subtitle1" color="text.secondary" component="div" sx={itemContentStyle}>
                             {subTitle1}
                         </Typography>
-                        <Typography variant="subtitle2" color="text.secondary" component="div" sx={mediaContentStyle}>
+                        <Typography variant="subtitle2" color="text.secondary" component="div" sx={itemContentStyle}>
                             {subTitle2}
                         </Typography>
                         <Box sx={{ display: 'flex', alignItems: 'center', pb: 1 }}>
@@ -79,7 +79,7 @@ function SearchRow({ track }: { track: MediaItemType }) {
                     alt={title}
                 />
             </Card>
-        </MediaItem>
+        </SearchItem>
     );
 }
 
