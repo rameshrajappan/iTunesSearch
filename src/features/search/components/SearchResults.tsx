@@ -28,11 +28,12 @@ const ErrorDisplay = () => (
 const InitialDisplay = () => (
     <p>Search for your favourite music</p>
 );
-export default function SearchResults({ searchTerm }: any) {
+export default function SearchResults() {
     const dispatch: any = useAppDispatch()
     const activeItems = useAppSelector(selectActivePageItems);
     const allItems = useAppSelector(selectAllItems);
     const itemStatus = useAppSelector((state: RootState) => state.search.status);
+    const searchTerm = useAppSelector((state: RootState) => state.search.searchTerm);
     const error = useAppSelector((state: RootState) => state.search.error);
     const hasMoreItems = useAppSelector(hasMoreItemsToRender);
     const fetchNextPage = () => {

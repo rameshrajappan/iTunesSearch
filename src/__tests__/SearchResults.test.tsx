@@ -7,8 +7,9 @@ test('when zero results', async () => {
         preloadedState: {
             search: {
                 data: { results: [], resultCount: 0 },
+                searchTerm: '',
                 status: 'succeeded',
-                currentPage: 1,
+                pageNumber: 1,
                 error: ''
             }
         }
@@ -22,8 +23,9 @@ test('when two results', async () => {
         preloadedState: {
             search: {
                 data: getMockSearchData(),
+                searchTerm: 'test',
                 status: 'succeeded',
-                currentPage: 1,
+                pageNumber: 1,
                 error: ''
             }
         }

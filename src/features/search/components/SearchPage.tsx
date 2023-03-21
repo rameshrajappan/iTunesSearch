@@ -4,7 +4,7 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
 import { useAppDispatch } from '../../../app/hook';
-import { fetchData } from '../searchSlice'
+import { fetchData, setSearchTerm } from '../searchSlice'
 import SearchResults from './SearchResults';
 import styled from 'styled-components';
 
@@ -15,16 +15,14 @@ const SearchPageWrapper = styled.div`
 
 export default function SearchPage() {
     const dispatch: any = useAppDispatch()
-    const [searchTerm, setSearchTerm] = useState("");
-    //To display submitted search term
-    const [submittedTerm, setSubmittedTerm] = useState("");
+    const [searchTextVal, setSearchTextVal] = useState("");
     const handleSubmit = (e: any) => {
         e.preventDefault();
-        setSubmittedTerm(searchTerm);
-        dispatch(fetchData(searchTerm));
+        dispatch(setSearchTerm(searchTextVal));
+        dispatch(fetchData(searchTextVal));
     };
     const handleTextFieldChange = (e: any) => {
-        setSearchTerm(e.target.value);
+        setSearchTextVal(e.target.value);
     };
 
     return (
@@ -41,17 +39,17 @@ export default function SearchPage() {
                 }}
                 elevation={4}>
                 <InputBase
-                    value={searchTerm}
+                    value={searchTextVal}
                     onChange={handleTextFieldChange}
                     sx={{ ml: 1, flex: 1 }}
                     placeholder="Search iTunes"
                     inputProps={{ 'aria-label': 'search iTunes' }}
-                    data-testid="searchTerm" />
-                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" data-testid="searchButton" disabled={!searchTerm}>
+                    data-testid="searchText" />
+                <IconButton type="submit" sx={{ p: '10px' }} aria-label="search" data-testid="searchButton" disabled={!searchTextVal}>
                     <SearchIcon />
                 </IconButton>
             </Paper>
-            <SearchResults searchTerm={submittedTerm} />
+            <SearchResults />
         </SearchPageWrapper>
     );
 }

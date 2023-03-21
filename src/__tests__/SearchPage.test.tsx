@@ -10,7 +10,7 @@ test('renders search page', async () => {
     const { asFragment } = renderWithProviders(<SearchPage />);
     expect(asFragment).toMatchSnapshot();
     const searchButton = screen.getByTestId("searchButton");
-    const searchMaterialInput = screen.getByTestId("searchTerm");
+    const searchMaterialInput = screen.getByTestId("searchText");
     const searchInput = within(searchMaterialInput).getByRole('textbox');
     fireEvent.change(searchInput, { target: { value: 'test' } });
     fireEvent.click(searchButton);

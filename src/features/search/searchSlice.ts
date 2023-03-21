@@ -5,9 +5,10 @@ import SearchStateType from './types/SearchStateType';
 import { getSearchData } from './services/searchService';
 
 export const initialState: SearchStateType = {
+    searchTerm: '',
     data: { results: [], resultCount: 0 },
     status: 'idle',
-    currentPage: 1,
+    pageNumber: 1,
     error: ''
 };
 export const fetchData = createAsyncThunk('search/fetchData', async (searchTerm: any) => {
@@ -20,14 +21,17 @@ const searchSlice = createSlice({
     initialState,
     reducers: {
         moveNext(state) {
-            state.currentPage++;
+            state.pageNumber++;
+        },
+        setSearchTerm(state, action) {
+            state.searchTerm = action.payload;
         }
     },
     extraReducers(builder) {
         builder
-            .addCase(fetchData.pending, (state, action) => {
+            .addCase(fetchData.pending, (state) => {
                 state.status = 'loading';
-                state.currentPage = 1;
+                state.pageNumber = 1;
             })
             .addCase(fetchData.fulfilled, (state, action) => {
                 state.status = 'succeeded';
@@ -40,12 +44,12 @@ const searchSlice = createSlice({
     }
 });
 
-export const { moveNext } = searchSlice.actions;
+export const { moveNext, setSearchTerm } = searchSlice.actions;
 export default searchSlice.reducer;
 
 export const selectAllItems = (state: RootState) => state.search?.data?.results;
 
-export const selectActivePageItems = (state: RootState) => state.search?.data?.results?.slice(0, state.search.currentPage * BATCH_SIZE);
+export const selectActivePageItems = (state: RootState) => state.search?.data?.results?.slice(0, state.search.pageNumber * BATCH_SIZE);
 
-export const hasMoreItemsToRender = (state: RootState) => (state.search?.currentPage * BATCH_SIZE) < state.search?.data?.resultCount;
+export const hasMoreItemsToRender = (state: RootState) => (state.search?.pageNumber * BATCH_SIZE) < state.search?.data?.resultCount;
 
