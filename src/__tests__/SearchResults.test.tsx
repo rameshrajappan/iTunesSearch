@@ -1,12 +1,12 @@
 import { cleanup, screen, within } from '@testing-library/react';
 import { getMockSearchData, renderWithProviders } from '../utils/test-utils';
-import SearchResults from '../features/medias/components/SearchResults';
+import SearchResults from '../features/search/components/SearchResults';
 afterEach(cleanup);
 test('when zero results', async () => {
     renderWithProviders(<SearchResults />, {
         preloadedState: {
-            itunes: {
-                medias: { results: [], resultCount: 0 },
+            search: {
+                data: { results: [], resultCount: 0 },
                 status: 'succeeded',
                 currentPage: 1,
                 error: ''
@@ -20,8 +20,8 @@ test('when zero results', async () => {
 test('when two results', async () => {
     renderWithProviders(<SearchResults />, {
         preloadedState: {
-            itunes: {
-                medias: getMockSearchData(),
+            search: {
+                data: getMockSearchData(),
                 status: 'succeeded',
                 currentPage: 1,
                 error: ''

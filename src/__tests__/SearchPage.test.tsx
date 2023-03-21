@@ -1,7 +1,7 @@
 import { cleanup, screen, fireEvent, within } from '@testing-library/react';
 import { renderWithProviders, getMockSearchData } from '../utils/test-utils';
 import axios from 'axios';
-import SearchPage from '../features/medias/components/SearchPage';
+import SearchPage from '../features/search/components/SearchPage';
 afterEach(cleanup);
 jest.mock('axios');
 test('renders search page', async () => {
