@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.8d41c8aa.js",
-    "static/js/787.0aba7c56.chunk.js": "/static/js/787.0aba7c56.chunk.js",
-    "static/media/header-logo.png": "/static/media/header-logo.08c0f81faa437b4e4858.png",
-    "index.html": "/index.html",
-    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.8d41c8aa.js.map": "/static/js/main.8d41c8aa.js.map",
-    "787.0aba7c56.chunk.js.map": "/static/js/787.0aba7c56.chunk.js.map"
+    "main.css": "/iTunesSearchDemo/static/css/main.e6c13ad2.css",
+    "main.js": "/iTunesSearchDemo/static/js/main.c4af14ec.js",
+    "static/js/787.0aba7c56.chunk.js": "/iTunesSearchDemo/static/js/787.0aba7c56.chunk.js",
+    "static/media/header-logo.png": "/iTunesSearchDemo/static/media/header-logo.08c0f81faa437b4e4858.png",
+    "index.html": "/iTunesSearchDemo/index.html",
+    "main.e6c13ad2.css.map": "/iTunesSearchDemo/static/css/main.e6c13ad2.css.map",
+    "main.c4af14ec.js.map": "/iTunesSearchDemo/static/js/main.c4af14ec.js.map",
+    "787.0aba7c56.chunk.js.map": "/iTunesSearchDemo/static/js/787.0aba7c56.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.8d41c8aa.js"
+    "static/js/main.c4af14ec.js"
   ]
 }
