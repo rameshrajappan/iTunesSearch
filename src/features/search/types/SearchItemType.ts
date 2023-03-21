@@ -1,4 +1,4 @@
-type MediaItemType = {
+type SearchItemType = {
     wrapperType: string,
     artistId: number,
     collectionId: number,
@@ -22,4 +22,4 @@ type MediaItemType = {
     kind?: string,
     trackName?: string
 };
-export default MediaItemType;
+export default SearchItemType;

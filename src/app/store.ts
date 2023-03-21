@@ -3,10 +3,10 @@ import {
     configureStore
 } from '@reduxjs/toolkit';
 import type { PreloadedState } from '@reduxjs/toolkit';
-import mediasReducer from '../features/medias/mediasSlice';
+import searchReducer from '../features/search/searchSlice';
 // Create the root reducer independently to obtain the RootState type
 const rootReducer = combineReducers({
-    itunes: mediasReducer
+    search: searchReducer
 });
 export function setupStore(preloadedState?: PreloadedState<RootState>) {
     return configureStore({

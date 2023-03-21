@@ -1,6 +1,6 @@
 import { cleanup, screen } from '@testing-library/react';
 import { getMockTrack1, renderWithProviders } from '../utils/test-utils';
-import SearchRow from '../features/medias/components/SearchRow';
+import SearchRow from '../features/search/components/SearchRow';
 afterEach(cleanup);
 test('render media row', async () => {
     const trackData = getMockTrack1();
